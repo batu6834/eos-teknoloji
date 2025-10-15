@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* src/index.css veya global CSS dosyanız */
+
+/* react-slick'in varsayılan stillerini ezmek için */
+.slick-slide>div {
+    height: 100vh !important;
+    /* Her slaytın tam ekran yüksekliğini almasını sağlar */
+}
+
+/* Eğer video veya resimler de tam sığmıyorsa */
+.slick-slide video,
+.slick-slide img {
+    height: 100% ;
+    object-fit: cover ;
+}
