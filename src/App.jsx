@@ -9,8 +9,8 @@ import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 import AdminPanel from './components/AdminComponents/AdminPanel';
 import AdminLogin from './components/AdminComponents/AdminLogin';
 import Contact from './pages/Contact';
-import Products from './pages/Products';
-import ProductDetail from './pages/ProductDetail';
+// import Products from './pages/Products';
+// import ProductDetail from './pages/ProductDetail';
 import Errors from './pages/Errors';
 import Support from './pages/Support';
 import Home from './pages/Home';
@@ -47,8 +47,8 @@ function Shell() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/urun-detay/:id" element={<ProductDetail />} />
+          {/* <Route path="/products" element={<Products />} /> */}
+          {/* <Route path="/urun-detay/:id" element={<ProductDetail />} /> */}
           <Route path="/errors" element={<Errors />} />
           <Route path="/support" element={<Support />} />
           <Route path="/services/TechnicalService" element={<TechnicalService />} />

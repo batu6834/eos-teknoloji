@@ -37,7 +37,6 @@ function Navbar() {
                 <div className="hidden md:flex space-x-6 items-center">
                     <Link to="/" className="font-medium px-3 py-2 rounded-md hover:bg-white hover:bg-opacity-20">Anasayfa</Link>
                     <Link to="/about" className="font-medium px-3 py-2 rounded-md hover:bg-white hover:bg-opacity-20">Hakkımızda</Link>
-                    <Link to="/products" className="font-medium px-3 py-2 rounded-md hover:bg-white hover:bg-opacity-20">Ürünler</Link>
                     <Link to="/partnerships" className="font-medium px-3 py-2 rounded-md hover:bg-white hover:bg-opacity-20">İş Ortaklıkları</Link>
                     <Link to="/support" className="font-medium px-3 py-2 rounded-md hover:bg-white hover:bg-opacity-20">Destek</Link>
                     <Link to="/contact" className="font-medium px-3 py-2 rounded-md hover:bg-white hover:bg-opacity-20">İletişim</Link>
@@ -88,7 +87,7 @@ function Navbar() {
 
                         <Link onClick={() => setIsOpen(false)} to="/" className="text-white text-2xl mb-6 font-semibold hover:text-blue-200">Anasayfa</Link>
                         <Link onClick={() => setIsOpen(false)} to="/about" className="text-white text-2xl mb-6 font-semibold hover:text-blue-200">Hakkımızda</Link>
-                        <Link onClick={() => setIsOpen(false)} to="/products" className="text-white text-2xl mb-6 font-semibold hover:text-blue-200">Ürünler</Link>
+                        {/* <Link onClick={() => setIsOpen(false)} to="/products" className="text-white text-2xl mb-6 font-semibold hover:text-blue-200">Ürünler</Link> */}
                         <Link onClick={() => setIsOpen(false)} to="/partnerships" className="text-white text-2xl mb-6 font-semibold hover:text-blue-200">İş Ortaklıkları</Link>
                         <Link onClick={() => setIsOpen(false)} to="/support" className="text-white text-2xl mb-6 font-semibold hover:text-blue-200">Destek</Link>
                         <Link onClick={() => setIsOpen(false)} to="/contact" className="text-white text-2xl font-semibold hover:text-blue-200">İletişim</Link>
