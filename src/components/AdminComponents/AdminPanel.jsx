@@ -13,7 +13,7 @@ import {
 
 import AdminContacts from './AdminContacts';
 import AdminTickets from './AdminTickets';
-import AdminProducts from './AdminProducts';
+// import AdminProducts from './AdminProducts';
 import AdminCompanies from './AdminCompanies';
 import PerformancePage from '../../pages/PerformancePage';
 
@@ -65,8 +65,8 @@ const AdminPanel = () => {
                 return <AdminTickets />;
             case 'iletisim-formlari':
                 return <AdminContacts />;
-            case 'urun-yonetimi':
-                return <AdminProducts />;
+            // case 'urun-yonetimi':
+            //     return <AdminProducts />;
             case 'firmalar':
                 return <AdminCompanies />;
             case 'performans':
