@@ -3,11 +3,10 @@ import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// --- SLAYT LİSTESİ GÜNCELLENDİ ---
 const slides = [
     {
-        type: 'youtube', // Değişti
-        videoSrc: "https://www.youtube.com/embed/G6WRKIgvqJs?autoplay=1&mute=1&loop=1&playlist=G6WRKIgvqJs&controls=0&showinfo=0&modestbranding=1", // Değişti
+        type: 'youtube',
+        videoSrc: "https://www.youtube.com/embed/G6WRKIgvqJs?autoplay=1&mute=1&loop=1&playlist=G6WRKIgvqJs&controls=0&showinfo=0&modestbranding=1&autohide=1",
         title: "EOS Teknoloji'ye Hoş Geldiniz",
         description: "Yazıcı destek çözümleri ve teknik servis ihtiyaçlarınız için buradayız.",
         buttonText: 'Hemen Keşfet',
@@ -30,8 +29,8 @@ const slides = [
         buttonLink: '/services',
     },
     {
-        type: 'youtube', // Değişti
-        videoSrc: "https://www.youtube.com/embed/nZLKAXwR_pM?autoplay=1&mute=1&loop=1&playlist=nZLKAXwR_pM&controls=0&showinfo=0&modestbranding=1", // Değişti
+        type: 'youtube',
+        videoSrc: "https://www.youtube.com/embed/nZLKAXwR_pM?autoplay=1&mute=1&loop=1&playlist=nZLKAXwR_pM&controls=0&showinfo=0&modestbranding=1&autohide=1",
         title: "Yazıcı Destek Hizmeti",
         description: "Arıza, kurulum ve bakım için hızlı teknik çözümler.",
         buttonText: 'Detaylı Bilgi',
@@ -41,50 +40,55 @@ const slides = [
         type: 'image',
         image: "/img/home-photo4.jpg",
         title: "Sunucu Hizmetleri",
-        description: "Güvenli ve kesintisiz sunucu alaptyapısı sunuyoruz.",
+        description: "Güvenli ve kesintisiz sunucu altyapısı sunuyoruz.",
         buttonText: 'Çözümlerimiz',
         buttonLink: '/products',
     },
     {
-        type: 'youtube', // Değişti
-        videoSrc: "https://www.youtube.com/embed/QVXyxnveJ-s?autoplay=1&mute=1&loop=1&playlist=QVXyxnveJ-s&controls=0&showinfo=0&modestbranding=1", // Değişti
+        type: 'youtube',
+        videoSrc: "https://www.youtube.com/embed/QVXyxnveJ-s?autoplay=1&mute=1&loop=1&playlist=QVXyxnveJ-s&controls=0&showinfo=0&modestbranding=1&autohide=1",
         title: "Güvenli Ağ Altyapısı",
         description: "Veri güvenliğinizi güçlü ağ çözümleriyle sağlıyoruz.",
         buttonText: 'Daha Fazla',
         buttonLink: '/products',
     }
 ];
-// --- GÜNCELLEME BİTTİ ---
+const textContainerVariants = { /* ... aynı kalacak ... */ };
+const textVariants = { /* ... aynı kalacak ... */ };
 
 
-// --- Bu kısımlarda değişiklik yok ---
-const textContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.2,
-        },
-    },
-    exit: { opacity: 0, transition: { duration: 0.3 } }
-};
+// --- YARDIMCI COMPONENT BAŞLANGICI ---
+// Bu küçük component'in tek görevi, YouTube videosunu tam ekran kaplayacak şekilde göstermek.
+function YouTubeBackground({ src, title }) {
+    return (
+        <div className="absolute inset-0 overflow-hidden bg-black">
+            <iframe
+                src={src}
+                title={title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                // Bu CSS kodları, videonun oranını koruyarak ekranı tamamen kaplamasını sağlar
+                style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '100vw',
+                    height: '56.25vw',
+                    minWidth: '177.77vh',
+                    minHeight: '100vh',
+                    transform: 'translate(-50%, -50%)',
+                }}
+                className="pointer-events-none"
+            ></iframe>
+        </div>
+    );
+}
+// --- YARDIMCI COMPONENT BİTTİ ---
 
-const textVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-        y: 0,
-        opacity: 1,
-        transition: {
-            type: 'spring',
-            damping: 15,
-            stiffness: 100,
-        },
-    },
-    exit: { y: -20, opacity: 0, transition: { duration: 0.3 } }
-};
 
 function HeroSlider() {
-
+    // Bu kısımların hepsi senin orijinal kodunla aynı.
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -108,16 +112,10 @@ function HeroSlider() {
                 {slides.map((slide, index) => (
                     <div key={index} className="relative h-full">
 
-                        {/* --- RENDER MANTIĞI GÜNCELLENDİ --- */}
+                        {/* Render mantığı artık daha temiz. 
+                            Eğer tip 'youtube' ise, bizim özel component'imizi çağırıyor. */}
                         {slide.type === 'youtube' ? (
-                            <iframe
-                                src={slide.videoSrc}
-                                title={slide.title}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                className="w-full h-full object-cover pointer-events-none"
-                            ></iframe>
+                            <YouTubeBackground src={slide.videoSrc} title={slide.title} />
                         ) : (
                             <img
                                 src={slide.image}
@@ -125,12 +123,9 @@ function HeroSlider() {
                                 className="w-full h-full object-cover"
                             />
                         )}
-                        {/* --- GÜNCELLEME BİTTİ --- */}
 
-
-                        {/* --- Bu kısımlarda değişiklik yok --- */}
+                        {/* Bu kısımların hepsi de senin orijinal kodunla aynı. */}
                         <div className="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
-
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-20 pt-20">
                             <AnimatePresence mode="wait">
                                 {index === activeSlideIndex && (
