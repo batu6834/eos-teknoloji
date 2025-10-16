@@ -3,11 +3,11 @@ import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-
+// --- SLAYT LİSTESİ GÜNCELLENDİ ---
 const slides = [
     {
-        type: 'video',
-        videoSrc: "/videos/printer-video1.mp4",
+        type: 'youtube', // Değişti
+        videoSrc: "https://www.youtube.com/embed/G6WRKIgvqJs?autoplay=1&mute=1&loop=1&playlist=G6WRKIgvqJs&controls=0&showinfo=0&modestbranding=1", // Değişti
         title: "EOS Teknoloji'ye Hoş Geldiniz",
         description: "Yazıcı destek çözümleri ve teknik servis ihtiyaçlarınız için buradayız.",
         buttonText: 'Hemen Keşfet',
@@ -30,8 +30,8 @@ const slides = [
         buttonLink: '/services',
     },
     {
-        type: 'video',
-        videoSrc: "/videos/printer-video2.mp4",
+        type: 'youtube', // Değişti
+        videoSrc: "https://www.youtube.com/embed/nZLKAXwR_pM?autoplay=1&mute=1&loop=1&playlist=nZLKAXwR_pM&controls=0&showinfo=0&modestbranding=1", // Değişti
         title: "Yazıcı Destek Hizmeti",
         description: "Arıza, kurulum ve bakım için hızlı teknik çözümler.",
         buttonText: 'Detaylı Bilgi',
@@ -41,20 +41,23 @@ const slides = [
         type: 'image',
         image: "/img/home-photo4.jpg",
         title: "Sunucu Hizmetleri",
-        description: "Güvenli ve kesintisiz sunucu altyapısı sunuyoruz.",
+        description: "Güvenli ve kesintisiz sunucu alaptyapısı sunuyoruz.",
         buttonText: 'Çözümlerimiz',
         buttonLink: '/products',
     },
     {
-        type: 'video',
-        videoSrc: "/videos/network-video.mp4",
+        type: 'youtube', // Değişti
+        videoSrc: "https://www.youtube.com/embed/QVXyxnveJ-s?autoplay=1&mute=1&loop=1&playlist=QVXyxnveJ-s&controls=0&showinfo=0&modestbranding=1", // Değişti
         title: "Güvenli Ağ Altyapısı",
         description: "Veri güvenliğinizi güçlü ağ çözümleriyle sağlıyoruz.",
         buttonText: 'Daha Fazla',
         buttonLink: '/products',
     }
 ];
+// --- GÜNCELLEME BİTTİ ---
 
+
+// --- Bu kısımlarda değişiklik yok ---
 const textContainerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -104,17 +107,17 @@ function HeroSlider() {
             <Slider {...settings} className="h-full">
                 {slides.map((slide, index) => (
                     <div key={index} className="relative h-full">
-                        {slide.type === 'video' ? (
-                            <video
+
+                        {/* --- RENDER MANTIĞI GÜNCELLENDİ --- */}
+                        {slide.type === 'youtube' ? (
+                            <iframe
                                 src={slide.videoSrc}
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="w-full h-full object-cover"
-                            >
-                                Tarayıcınız video etiketini desteklemiyor.
-                            </video>
+                                title={slide.title}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                className="w-full h-full object-cover pointer-events-none"
+                            ></iframe>
                         ) : (
                             <img
                                 src={slide.image}
@@ -122,7 +125,10 @@ function HeroSlider() {
                                 className="w-full h-full object-cover"
                             />
                         )}
+                        {/* --- GÜNCELLEME BİTTİ --- */}
 
+
+                        {/* --- Bu kısımlarda değişiklik yok --- */}
                         <div className="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
 
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-20 pt-20">
