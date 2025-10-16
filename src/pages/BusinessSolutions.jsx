@@ -1,28 +1,58 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Sayfa içi navigasyon için Link bileşeni
+import { Link } from 'react-router-dom';
 import servicesData from '../data/servicesData/BusinessSolutionsData';
+
+// --- YARDIMCI COMPONENT: Videoyu tam ekran kaplamak için ---
+// Bu, diğer sayfalarda kullandığımızın aynısı. Proje boyunca tutarlılık sağlıyor.
+function YouTubeBackground({ src, title }) {
+    return (
+        // Dış div, taşan videoyu gizler ve arkaplanı siyah yapar
+        <div className="absolute inset-0 overflow-hidden bg-black z-0">
+            <iframe
+                src={src}
+                title={title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                // Bu CSS kodları, videonun oranını koruyarak ekranı tamamen kaplamasını sağlar
+                style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '100vw',
+                    height: '56.25vw',
+                    minWidth: '177.77vh',
+                    minHeight: '100vh',
+                    transform: 'translate(-50%, -50%)',
+                }}
+                className="pointer-events-none"
+            ></iframe>
+        </div>
+    );
+}
+// --- YARDIMCI COMPONENT BİTTİ ---
+
 
 function BusinessSolutions() {
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [])
+    }, []);
+
     const service = servicesData[0];
+
+    // business-solution-video.mp4 için YouTube ID'si: Rug7FysEOak
+    const videoSrc = "https://www.youtube.com/embed/Rug7FysEOak?autoplay=1&mute=1&loop=1&playlist=Rug7FysEOak&controls=0&showinfo=0&modestbranding=1&autohide=1";
 
     return (
         <div>
             {/* Hero Section with Video Background */}
             <div className="relative h-[50vh] md:h-[70vh] overflow-hidden">
-                <video
-                    src="/videos/business-solution-video.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover z-0"
-                >
-                    Tarayıcınız video etiketini desteklemiyor.
-                </video>
-                {/* Video üzerine yarı saydam koyu katman ve metin */}
+
+                {/* --- ARKA PLAN VİDEOSU GÜNCELLENDİ --- */}
+                <YouTubeBackground src={videoSrc} title={service.title} />
+                {/* --- GÜNCELLEME BİTTİ --- */}
+
+                {/* Video üzerine yarı saydam koyu katman ve metin (bu kısım aynı kaldı) */}
                 <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center text-white text-center p-4 z-10">
                     <h1 className="text-4xl md:text-6xl font-bold mb-4">{service.title}</h1>
                     <p className="max-w-3xl text-lg md:text-xl leading-relaxed">
@@ -31,7 +61,7 @@ function BusinessSolutions() {
                 </div>
             </div>
 
-            {/* Main Content Section - Hero alanının üzerine bindirilmiş */}
+            {/* Main Content Section (bu kısım aynı kaldı) */}
             <div className="max-w-5xl mx-auto px-4 py-10 bg-white shadow-lg rounded-lg -mt-16 relative z-20">
                 <h2 className="text-3xl font-bold text-blue-600 mb-6">{service.title} Hizmet Detayları</h2>
                 {service.longDescription.map((paragraph, idx) => (
